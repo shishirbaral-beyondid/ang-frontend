@@ -1,0 +1,15 @@
+.peers .custom-buttom{
+    width:100%;
+    padding:20px;
+}
+
+.peers .custom-buttom i {
+    font-size: 20px;
+}
+.tab-container {
+    background-color: #f2f3f5 !important;
+}
+.tab-container ul  {
+    padding:20px !important;
+}
+

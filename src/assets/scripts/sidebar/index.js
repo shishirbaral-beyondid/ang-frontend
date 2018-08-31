@@ -1,10 +1,10 @@
-//import * as $ from 'jquery';
-
-
+//const $ = required('jquery')
   // Sidebar links
-  (function () { $('.sidebar .sidebar-menu li a').on('click', function () {
+$(function () { 
+  $('.sidebar .sidebar-inner .sidebar-menu li a').on('click', function () {
     const $this = $(this);
-    
+    console.log("here");
+    debugger;
     if ($this.parent().hasClass('open')) {
       $this
         .parent()
@@ -74,4 +74,5 @@
     setTimeout(() => {
       window.dispatchEvent(window.EVENT);
     }, 300);
-  })})();
+  })
+  });

@@ -1,0 +1,134 @@
+<div class="container-fluid">
+  <app-alert-message [message]="message" [alertClass]="alertClass"></app-alert-message>
+
+  <div class="row">
+
+    <div class="col-md-3">
+      <div class="bdrs-3 ov-h bgc-white bd">
+        <div class="bgc-deep-purple-500 ta-c p-30">
+          <h1 class="fw-300 mB-5 lh-1 c-white">{{user.profile.firstName | uppercase }} {{ user.profile.lastName | uppercase}}
+            <span class="fsz-def">{{user.profile.email | lowercase}}</span>
+          </h1>
+          <h3 class="c-white">{{user.status}}</h3>
+        </div>
+        <div class="pos-r">
+
+          <ul class="m-0 p-0 mT-20">
+            <li class="bdB peers ai-c jc-sb fxw-nw">
+              <a class="td-n p-20 peers fxw-nw mR-20 peer-greed c-grey-900" href="javascript:void(0);" data-toggle="modal" data-target="#calendar-edit">
+                <div class="peer mR-15">
+                  <i class="fa fa-mobile fa-clock-o c-red-500"></i>
+                </div>
+                <div class="peer">
+                  <span class="fw-600">Mobile Phone</span>
+                  <div class="c-grey-600">
+                    <span class="c-grey-700">{{user.profile.mobilePhone}}</span>
+                  </div>
+                </div>
+              </a>
+
+            </li>
+            <li class="bdB peers ai-c jc-sb fxw-nw">
+              <a class="td-n p-20 peers fxw-nw mR-20 peer-greed c-grey-900" href="javascript:void(0);" data-toggle="modal" data-target="#calendar-edit">
+                <div class="peer mR-15">
+                  <i class="fa fa-fw fa-clock-o c-blue-500"></i>
+                </div>
+                <div class="peer">
+                  <span class="fw-600">City</span>
+                  <div class="c-grey-600">
+                    <span class="c-grey-700"></span>
+                  </div>
+                </div>
+              </a>
+
+            </li>
+            <li class="bdB peers ai-c jc-sb fxw-nw">
+              <div class="td-n fxw-nw peer-greed c-grey-900">
+                <button type="button" (click)="openModal(suspendTemplate)" class="btn btn-warning custom-buttom">
+                  <h3>Suspend</h3>
+                </button>
+
+
+              </div>
+            </li>
+            <li class="bdB peers ai-c jc-sb fxw-nw">
+              <div class="td-n  peers fxw-nw  peer-greed c-grey-900">
+                <button type="button" (click)="openModal(deleteTemplate)" class="btn btn-danger custom-buttom">
+                  <h3>Terminate</h3>
+                </button>
+
+
+              </div>
+
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-9">
+
+      <div>
+        <tabset #tabset class="d-flex flex-row mt-2 bdB user-profile-tab " [vertical]="true" type="pills">
+          <tab heading="Application" #application (select)="onSelect($event)">
+            <div *ngIf="isLoading">
+
+              <app-custom-spinner [size]="'sm'"></app-custom-spinner>
+
+            </div>
+            <ng-container *ngIf="applications.length>0">
+              <app-user-profile-application [applications]="applications"></app-user-profile-application>
+            </ng-container>
+          </tab>
+
+          <tab heading="Groups" (select)="onSelect($event)">
+            <div *ngIf="isLoading">
+
+              <app-custom-spinner [size]="'sm'"></app-custom-spinner>
+
+            </div>
+            <ng-container *ngIf="groupsData.length>0">
+              <app-user-profile-group #groups [groupsData]="groupsData" [user]="user" (groupAddStatus)="userAddedToGroupStatus($event)"></app-user-profile-group>
+
+            </ng-container>
+          </tab>
+
+          <tab heading="Profile" (select)="onSelect($event)">
+            <div *ngIf="isLoading">
+
+              <app-custom-spinner [size]="'sm'"></app-custom-spinner>
+
+            </div>
+            <ng-container *ngIf="user && !isLoading">
+
+              <app-user-profile-detail #profile [user]="user" [userDetail]="userDetail" (loaderStatus)="loaderStatus($event)" (userProfileUpdateMessage)="userProfileUpdateMessage($event)"></app-user-profile-detail>
+            </ng-container>
+
+          </tab>
+        </tabset>
+      </div>
+
+      <!--   </div>
+            </div>
+          </div> -->
+
+
+    </div>
+  </div>
+
+
+</div>
+<ng-template #suspendTemplate>
+  <div class="modal-body text-center">
+    <p>Do you want suspend user?</p>
+    <button type="button" class="btn btn-default" (click)="confirmSuspend()">Yes</button>
+    <button type="button" class="btn btn-primary" (click)="decline()">No</button>
+  </div>
+</ng-template>
+
+<ng-template #deleteTemplate>
+  <div class="modal-body text-center">
+    <p>Do you want to terminate user?</p>
+    <button type="button" class="btn btn-danger" (click)="confirmTerminate()">Yes</button>
+    <button type="button" class="btn btn-primary" (click)="decline()">No</button>
+  </div>
+</ng-template>

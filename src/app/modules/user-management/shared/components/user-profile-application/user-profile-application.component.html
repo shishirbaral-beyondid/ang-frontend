@@ -1,0 +1,32 @@
+<div class="layer w-100">
+    <div class="peers fxw-nw jc-sb ai-c pY-20 pX-30 bgc-white">
+      
+      <div class="peers">
+       
+         <a href="" class="peer td-n c-grey-900 cH-blue-500 fsz-md" title="">
+           <i class="ti-pencil"></i>
+          </a>
+        </div>
+      </div>
+  </div>
+  <div class="mT-30 mB-30 overflow-auto">
+      <div class="container" >
+             <!-- Sidebar -->
+               <ng-container *ngIf="applications" >
+                  <div *ngFor="let application of applications" class="peers fxw-nw ai-c p-20 bdB bgc-white bgcH-grey-50 cur-p">
+                      <div class="peer">
+                        <img [src]="application.logoUrl" alt="" class="w-3r h-3r bdrs-50p w-auto">
+                      </div>
+                      <div class="peer peer-greed pL-20">
+                        <h6 class="mB-0 lh-1 fw-400"> {{application.label}}</h6>
+                        <small class="lh-1 c-green-500"></small>
+                      </div>
+                    </div>
+               </ng-container>
+                  
+                    
+                 
+
+      </div>
+    </div>
+      

@@ -1,0 +1,41 @@
+<div class="row">
+    <div class="col-md-12">
+      <app-alert-message [message]="message" [alertClass]="alertClass"></app-alert-message>
+      <div class="bgc-white bd bdrs-3 p-20 mB-20">
+        <h4 class="c-grey-900 mB-20">Groups</h4>
+        <div>
+                <button type="button" (click)="openGroupAddModal()" class="btn btn-primary">Add Group</button>
+        </div>
+         <table class="table table-striped">
+          <thead>
+            <tr>
+              <th >#</th>
+              <th>Source</th>
+              <th >Group Name</th>
+              <th>Description</th>
+              <th>Action</th>
+             
+            </tr>
+          </thead>
+          <ng-container *ngIf="groups">
+          <tbody>
+            
+                <tr *ngFor="let group of groups;let i=index">
+                    <th >{{i+1}}</th>
+                    <th><img [src]="group.links.logo[0].href" alt=""></th>
+                    <td><a [routerLink]="[group.id]">{{group.profile.name}} </a></td>
+                    <td>{{group.profile.description}}</td>
+                    <td><button class="btn btn-primary" (click)="editGroup(group.id)" ><i tooltip="Edit Group" class="ti-pencil"></i></button>
+                      <button class="btn btn-danger" (click)="deleteGroup(group.id)"><i class="ti-trash" tooltip="Delete Group"></i></button>
+                    </td>
+                    </tr> 
+                   
+          </tbody>
+         
+        </ng-container>
+        </table>
+      </div>
+    </div>
+  </div>
+
+ 

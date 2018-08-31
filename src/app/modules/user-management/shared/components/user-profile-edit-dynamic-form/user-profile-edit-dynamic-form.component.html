@@ -1,0 +1,43 @@
+<div [formGroup]="userForm" class="form-group">
+  <label [attr.for]="userProfile.displayName">{{userProfile.displayName}}
+  <span *ngIf="userProfile.dataType ==='Array'">(comma (,) seperated value)</span>  <span *ngIf="userProfile.validation.required"> *</span>
+  </label>
+  <div [ngSwitch]="userProfile.dataType">
+ 
+  <input *ngSwitchCase="'String'"
+   [class.is-invalid]="userForm.get(userProfile.variableName).invalid && (userForm.get(userProfile.variableName).dirty || userForm.get(userProfile.variableName).touched)"
+   [formControlName]="userProfile.variableName" 
+   class="form-control" 
+   [id]="userProfile.variableName"
+    [readOnly]="!isEdit" 
+    type="text">
+    <input *ngSwitchCase="'Array'"
+     [class.is-invalid]="userForm.get(userProfile.variableName).invalid && (userForm.get(userProfile.variableName).dirty || userForm.get(userProfile.variableName).touched)"
+   [formControlName]="userProfile.variableName" 
+   class="form-control" 
+   [id]="userProfile.variableName"
+    [readOnly]="!isEdit" 
+    type="text">
+    
+    <select  
+    [id]="userProfile.variableName"  [disableControl]="!isEdit"
+     class="form-control" *ngSwitchCase="'Select'"
+      [formControlName]="userProfile.variableName">
+      <option *ngFor="let option of userProfile.options"
+     
+        [value]="option.key">{{option.value}}</option>
+     
+    </select>
+   
+  <div class="invalid-feedback" *ngIf="userForm.get(userProfile.variableName).invalid && (userForm.get(userProfile.variableName).dirty || userForm.get(userProfile.variableName).touched)">
+    <div *ngIf="userForm.get(userProfile.variableName).errors.required">
+      {{userProfile.displayName}} is required.
+
+    </div>
+    <div *ngIf="userForm.get(userProfile.variableName).errors?.minlength">
+        {{userProfile.displayName}}  must be minimum of {{userProfile.validation.minLength}} character.
+    </div>
+    <div *ngIf="userForm.get(userProfile.variableName).errors?.maxlength">
+      {{userProfile.displayName}}  must be maximum of  {{userProfile.validation.minLength}} character.
+  </div>
+  </div>

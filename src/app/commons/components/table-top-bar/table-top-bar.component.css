@@ -1,0 +1,43 @@
+.table-top-selector{
+    float:left;
+} 
+
+.table-top-selector select{
+    
+    border: 1px solid rgba(0, 0, 0, .0625);
+    border-radius: 2px;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    height: 35px;
+    font-size: 14px;
+    padding: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+    color: #72777a;
+    -webkit-transition: all 0.2s ease-in;
+    -o-transition: all 0.2s ease-in;
+    transition: all 0.2s ease-in;
+}
+.table-top-selector label{
+
+    display: inline-block;
+}
+
+.table-top-filter {
+    float:right;
+}
+
+.table-top-filter input {
+    border: 1px solid rgba(0, 0, 0, .0625);
+    border-radius: 2px;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    height: 35px;
+    font-size: 14px;
+    margin-left: 15px;
+    padding: 5px;
+    color: #72777a;
+    -webkit-transition: all 0.2s ease-in;
+    -o-transition: all 0.2s ease-in;
+    transition: all 0.2s ease-in;
+}

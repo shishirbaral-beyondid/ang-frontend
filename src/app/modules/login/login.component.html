@@ -1,1 +1,42 @@
-<div id="sign-in-widget"></div>
+<div class="peers ai-s fxw-nw h-100vh">
+        
+        <div class="col-12 col-md-4 peer pX-40 pY-80 h-100 bgc-white scrollable pos-mid" style='min-width: 320px;'>
+<!--             <app-alert-message [message]="message" [alertClass]="alertClass"></app-alert-message>
+ -->
+ <div class= "alert alert-{{alertClass}} alert-dismissible fade show"  *ngIf="message" role="alert">
+    {{message}}
+     <button type="button" class="close" (click)="closePopUp()"  aria-label="Close">
+       <span aria-hidden="true">&times;</span>
+     </button>
+   </div>
+          <h4 class="fw-300 c-grey-900 mB-40">Login</h4>
+          <form [formGroup]="loginForm" (ngSubmit)="loginUser()" >
+            <div class="form-group">
+              <label class="text-normal text-dark">Username</label>
+              <input formControlName="userName"
+               [ngClass]="{'is-invalid':loginForm.controls['userName'].errors  && (loginForm.controls['userName'].touched || loginForm.controls['userName'].dirty || isInvalid)}"
+              type="email" class="form-control" >
+              <div class="invalid-feedback" *ngIf="loginForm.controls['userName'].errors && (loginForm.controls['userName'].touched || loginForm.controls['userName'].dirty || isInvalid)">
+                    <div *ngIf="loginForm.controls['userName'].errors.required  || isInvalid">UserName is required.</div>
+                  </div>
+            </div>
+            <div class="form-group">
+              <label class="text-normal text-dark">Password</label>
+              <input type="password" [ngClass]="{'is-invalid':loginForm.controls['password'].errors  && (loginForm.controls['password'].touched || loginForm.controls['password'].dirty || isInvalid)}"
+              formControlName="password" class="form-control" >
+              <div class="invalid-feedback" *ngIf="loginForm.controls['password'].errors && (loginForm.controls['password'].touched || loginForm.controls['password'].dirty || isInvalid)">
+                    <div *ngIf="loginForm.controls['password'].errors.required || isInvalid">Password is required.</div>
+                  </div>
+            </div>
+            <div class="form-group">
+              <div class="peers ai-c jc-sb fxw-nw">
+               
+                <div class="peer">
+                  <button class="btn btn-primary">Login</button>
+                </div>
+                <a  class="register" [routerLink]="['/register']">Register Here</a>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>

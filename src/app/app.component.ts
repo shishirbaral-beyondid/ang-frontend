@@ -12,7 +12,8 @@
 
 import { Router } from "@angular/router";
 import { Component } from '@angular/core';
-import { OktaAuthService } from '@okta/okta-angular';
+import { OAuthService, JwksValidationHandler } from 'angular-oauth2-oidc';
+import { environment } from "../environments/environment";
 
 @Component({
   selector: 'app-root',
@@ -22,13 +23,18 @@ import { OktaAuthService } from '@okta/okta-angular';
 export class AppComponent {
   title = 'app';
   isAuthenticated: boolean;
-  constructor(public oktaAuth: OktaAuthService, private router: Router) {
-    this.oktaAuth.$authenticationState.subscribe(isAuthenticated => this.isAuthenticated = isAuthenticated)
+  constructor( private oauthService:OAuthService, private router: Router) {
+    this.oauthService.redirectUri = environment.okta.oidc.redirectUri;
+    this.oauthService.clientId = environment.okta.oidc.clientId;
+    this.oauthService.scope = environment.okta.oidc.scope;
+    this.oauthService.issuer = environment.okta.oidc.issuer;
+    this.oauthService.tokenValidationHandler = new JwksValidationHandler();
+    this.oauthService.setStorage(localStorage);
+     this.oauthService.loadDiscoveryDocument().then(() => {
+      this.oauthService.tryLogin()
+    }); 
   }
-  async ngOnInit() {
-    this.isAuthenticated = await this.oktaAuth.isAuthenticated();
-  }
-  logout() {
-    this.oktaAuth.logout('/');
-  }
+   ngOnInit() {
+ }
+  
 }

@@ -1,0 +1,49 @@
+<app-alert-message [message]="message" [alertClass]="alertClass"></app-alert-message>
+
+<div class="masonry-item offset-md-2 col-md-8">
+    <div class="bgc-white p-20 bd">
+      <h6 class="c-grey-900">User Registration Form</h6>
+      <div class="mT-30">
+        <form [formGroup]="userForm" (ngSubmit)="userRegistrationForm()">
+          <div class="form-group">
+            <label for="exampleInputEmail1">First Name <span calss="astrek">*</span></label>
+            <input type="text" formControlName="firstName"
+             class="form-control"
+              [ngClass]="{'is-invalid':userForm.controls['firstName'].errors  && (userForm.controls['firstName'].touched || userForm.controls['firstName'].dirty)}"
+            id="firstName" aria-describedby="emailHelp" >
+            <div class="invalid-feedback" *ngIf="userForm.controls['firstName'].errors && (userForm.controls['firstName'].touched || userForm.controls['firstName'].dirty)">
+              <div *ngIf="userForm.controls['firstName'].errors.required">First Name is required.</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Last Name </label>
+            <input type="text" formControlName="lastName" class="form-control" id="" >
+          </div>
+          <div class="form-group">
+            <label for="login">User Name <span calss="astrek">*</span></label>
+            <input type="email" [ngClass]="{'is-invalid':userForm.controls['login'].errors  && (userForm.controls['login'].touched || userForm.controls['login'].dirty)}"
+             formControlName="login" class="form-control" id="" >
+             <div class="invalid-feedback" *ngIf="userForm.controls['login'].errors && (userForm.controls['login'].touched || userForm.controls['login'].dirty)">
+                <div *ngIf="userForm.controls['login'].errors.required">User Name is required.</div>
+              </div>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Email <span calss="astrek">*</span></label>
+            <input type="email" [ngClass]="{'is-invalid':userForm.controls['email'].errors  && (userForm.controls['email'].touched || userForm.controls['email'].dirty)}"
+             formControlName="email" class="form-control" id="">
+            <div class="invalid-feedback" *ngIf="userForm.controls['email'].errors && (userForm.controls['email'].touched || userForm.controls['email'].dirty)">
+                <div *ngIf="userForm.controls['email'].errors.required">Email is required.</div>
+              </div>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Secondary Email</label>
+            <input type="email" formControlName="secondaryEmail" class="form-control" id="" >
+          </div>
+            
+              
+          
+          <button type="submit" [disabled]="!userForm.valid" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>

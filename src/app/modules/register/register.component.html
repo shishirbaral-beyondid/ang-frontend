@@ -1,0 +1,47 @@
+<div class="peers ai-s fxw-nw h-100vh">
+
+  <div class="col-12 col-md-4 peer pX-40 pY-80 h-100 bgc-white scrollable pos-mid " style='min-width: 320px;'>
+    <app-alert-message [message]="message" [alertClass]="alertClass"></app-alert-message>
+    <h4 class="fw-300 c-grey-900 mB-40">Register</h4>
+    <form [formGroup]="registrationForm" (ngSubmit)="registerUser()">
+      <div class="form-group">
+        <label class="text-normal text-dark">First Name</label>
+        <input type="text" class="form-control" formControlName="firstName" [ngClass]="{'is-invalid':registrationForm.controls['firstName'].errors  && (registrationForm.controls['firstName'].touched || registrationForm.controls['firstName'].dirty || isInvalid)}">
+        <div class="invalid-feedback" *ngIf="registrationForm.controls['firstName'].errors && (registrationForm.controls['firstName'].touched || registrationForm.controls['firstName'].dirty || isInvalid)">
+          <div *ngIf="registrationForm.controls['firstName'].errors.required  || isInvalid">First Name is required.</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="text-normal text-dark">Last Name</label>
+        <input type="text " class="form-control" formControlName="lastName">
+      </div>
+      <div class="form-group">
+        <label class="text-normal text-dark">Email</label>
+        <input type="email" class="form-control" [ngClass]="{'is-invalid':registrationForm.controls['email'].errors  && (registrationForm.controls['email'].touched || registrationForm.controls['email'].dirty || isInvalid)}"
+          formControlName="email">
+        <div class="invalid-feedback" *ngIf="registrationForm.controls['email'].errors && (registrationForm.controls['email'].touched || registrationForm.controls['email'].dirty || isInvalid)">
+          <div *ngIf="registrationForm.controls['email'].errors.required  || isInvalid">Email is required.</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="text-normal text-dark">User Name</label>
+        <input type="text" class="form-control" formControlName="login" [ngClass]="{'is-invalid':registrationForm.controls['login'].errors  && (registrationForm.controls['login'].touched || registrationForm.controls['login'].dirty || isInvalid)}">
+        <div class="invalid-feedback" *ngIf="registrationForm.controls['login'].errors && (registrationForm.controls['login'].touched || registrationForm.controls['login'].dirty || isInvalid)">
+          <div *ngIf="registrationForm.controls['login'].errors.required  || isInvalid">User Name is required.</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="text-normal text-dark">Mobile Phone</label>
+        <input type="text" class="form-control" formControlName="mobilePhone">
+      </div>
+      <div class="form-group">
+        <div _ngcontent-c2="" class="peers ai-c jc-sb fxw-nw">
+          <div class="peer">
+            <button class="btn btn-primary">Register</button>
+          </div>
+          <a [routerLink]="['/login']">Go To Login</a>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,40 @@
+<div class="container-fluid">
+    <app-alert-message [message]="message" [alertClass]="alertClass"></app-alert-message>
+
+    <div class="row">
+
+      <div class="col-md-3">
+        <ng-container *ngIf="group" >
+        <div class="bdrs-3 ov-h bgc-white bd">
+          <div class="bgc-deep-purple-500 ta-c p-30">
+            <h1 class="fw-300 mB-5 lh-1 c-white"><span class="fsz-def">{{group.profile.name}}</span></h1>
+            <h3 class="c-white">{{group.profile.description}}</h3>
+          </div>
+          
+        </div>
+      </ng-container>
+      </div>
+      <div class="col-md-9">
+       
+          <div >
+              <tabset  #tabset class="d-flex flex-row mt-2 bdB user-profile-tab " [vertical]="true" type="pills"  >
+                <tab heading="Users" (select)="onSelect($event)" >
+                  <div  *ngIf="isLoading">
+                    
+                  <app-custom-spinner [size]="'sm'"></app-custom-spinner>
+
+                </div>
+                
+                    <app-group-user-list [group]="group" [users]="users" (userAddStatus)="userAddStatus($event)"></app-group-user-list>
+                
+                
+                     </tab>
+                <tab heading="Applications" (select)="onSelect($event)" >
+                    Application list
+                </tab>
+              </tabset>
+          </div>
+      </div>
+
+    </div>
+  </div>

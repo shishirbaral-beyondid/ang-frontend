@@ -1,19 +1,16 @@
- <!-- #Left Sidebar ==================== -->
  <div class="sidebar">
     <div class="sidebar-inner">
-      <!-- ### $Sidebar Header ### -->
       <div class="sidebar-logo">
         <div class="peers ai-c fxw-nw">
           <div class="peer peer-greed">
-            <a class="sidebar-link td-n" href="index.html">
+            <a class="sidebar-link td-n" [routerLink]="['']">
               <div class="peers ai-c fxw-nw">
                 <div class="peer">
                   <div class="logo">
-                    <img src="assets/static/images/logo.png" alt="">
                   </div>
                 </div>
                 <div class="peer peer-greed">
-                  <h5 class="lh-1 mB-0 logo-text">Adminator</h5>
+                  <h5 class="lh-1 mB-0 logo-text">App</h5>
                 </div>
               </div>
             </a>
@@ -28,10 +25,9 @@
         </div>
       </div>
 
-      <!-- ### $Sidebar Menu ### -->
       <ul class="sidebar-menu scrollable pos-r">
-        <li class="nav-item mT-30 active">
-          <a class="sidebar-link" href="index.html">
+        <li class="nav-item mT-30" routerLinkActive="active">
+          <a class="sidebar-link" [routerLink]="['/dashboard']">
             <span class="icon-holder">
               <i class="c-blue-500 ti-home"></i>
             </span>
@@ -39,27 +35,69 @@
           </a>
         </li>
       
-        <li class="nav-item dropdown">
-              <a class="dropdown-toggle" >
+        <li class="nav-item dropdown "  routerLinkActive="open">
+              <a class="dropdown-toggle"  >
                 <span class="icon-holder">
-                  <i class="c-orange-500 ti-layout-list-thumb"></i>
+                  <i class="c-orange-500 ti-user"></i>
                 </span>
-                <span class="title">Tables</span>
+                <span class="title">User Management</span>
                 <span class="arrow">
                   <i class="ti-angle-right"></i>
                 </span>
               </a>
               <ul class="dropdown-menu">
-                <li>
-                  <a class='sidebar-link' href="basic-table.html">Basic Table</a>
+                <li >
+                  <a class='sidebar-link'  routerLinkActive="active" [routerLink]="['users/register']">Create User</a>
                 </li>
-                <li>
-                  <a class='sidebar-link' href="datatable.html">Data Table</a>
+                <li  >
+                  <a class='sidebar-link' routerLinkActive="active" [routerLink]="['users']">List User</a>
                 </li>
               </ul>
             </li>
+            <li class="nav-item" routerLinkActive="active">
+                <a class="sidebar-link" [routerLink]="['groups']">
+                  <span class="icon-holder">
+                    <i class="c-blue-500 ti-package"></i>
+                  </span>
+                  <span class="title">Groups</span>
+                </a>
+              </li>
        
        
       </ul>
     </div>
   </div>
+<!-- 
+ <div class="sidebar">
+    <div class="sidebar-inner">
+      <div class="sidebar-logo">
+        <div class="peers ai-c fxw-nw">
+          <div class="peer peer-greed">
+            <a class="sidebar-link td-n" [routerLink]="['']">
+              <div class="peers ai-c fxw-nw">
+                <div class="peer">
+                  <div class="logo">
+                  </div>
+                </div>
+                <div class="peer peer-greed">
+                  <h5 class="lh-1 mB-0 logo-text">App</h5>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class="peer">
+            <div class="mobile-toggle sidebar-toggle">
+              <a href="" class="td-n">
+                <i class="ti-arrow-circle-left"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <ul class="sidebar-menu scrollable pos-r">
+        
+          <app-side-menu-item *ngFor="let item of navItems" [item]="item"> </app-side-menu-item>
+      </ul>
+    </div>
+    </div> -->

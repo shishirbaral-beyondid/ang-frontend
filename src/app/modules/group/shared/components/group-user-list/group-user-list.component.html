@@ -1,0 +1,65 @@
+<ng-container *ngIf="users.length>0" >
+<div class="layer w-100">
+    <div class="peers fxw-nw jc-sb ai-c pY-20 pX-30 bgc-white">
+      
+      <div class="peers">
+       
+          <button  (click)="openModal(template)" class="peer td-n c-grey-900 cH-blue-500 fsz-md btn btn-primary" >
+           <i  tooltip ="Add Users"class="ti-plus"></i>
+          </button>        
+          
+        </div>
+      </div>
+  </div>
+  <div class="mT-30 mB-30">
+      <div class="container" >
+        <div *ngFor="let user of users" class="peers fxw-nw ai-c p-20 bdB bgc-white bgcH-grey-50 ">
+            <div class="peer peer-greed pL-20">
+              <a routerLink="/dashboard/users/{{user.id}}" class="cur-p" > <h6 class="mB-0 lh-1 fw-400">{{user.profile.firstName + ' ' + user.profile.lastName}}</h6></a>
+                <small class="lh-1 c-green-500">{{user.profile.email}}</small>
+            </div>
+            <div class="peers mR-15">
+                <div class="peer">
+                   <a (click)="openConfirmModal(user.id)" class="td-n c-deep-red-500 cH-red-500 fsz-md p-5">
+                       <i tooltip="Remove User" class="ti-trash icon-red"></i>
+                    </a> 
+                 </div>
+                        
+              </div>        
+          </div>
+      </div>
+    </div>
+  </ng-container>
+     <ng-template #template>
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">Add Group to user</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+              <form [formGroup]="userForm" novalidate>
+                <div class="form-group">
+                  <angular2-multiselect [data]="itemList" 
+                          [ngModel]="selectedItems" 
+                          [settings]="dropdownSettings" 
+                        
+                        
+                          formControlName="selectedUsers">
+                          <c-search>
+                              <ng-template>
+                                  <input type="text" (keyup)="onSearch($event)" placeholder="Search user by email" style="border: none;width: 100%; height: 100%;outline: none;"/>
+                              </ng-template>
+                         </c-search>
+                         <c-item>
+                             <ng-template let-item="item">
+                                 <label style="color: #333;width: 150px;">{{item.email}}</label>
+                             </ng-template>
+                         </c-item>
+                  </angular2-multiselect>
+                  </div>
+                  <button (click)="submitUserAddForm()" [disabled]="!userForm.valid" class="btn btn-success btn-block">Submit</button>
+              </form>
+
+      </div>
+    </ng-template> 

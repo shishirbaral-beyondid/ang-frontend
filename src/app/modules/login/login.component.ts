@@ -15,6 +15,11 @@ import * as OktaSignIn from '@okta/okta-signin-widget/dist/js/okta-sign-in.min.j
 import { OktaAuthService } from '@okta/okta-angular';
 import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
+import { FormBuilder,FormGroup ,Validators} from '@angular/forms';
+import { LoginModel } from './model/login.model';
+import { OktaAuthWrapper } from '../../commons/services/authWrapper.service';
+import { OAuthService } from 'angular-oauth2-oidc';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-login',
@@ -23,56 +28,98 @@ import { environment } from '../../../environments/environment';
 })
 export class LoginComponent implements OnInit {
   signIn: any;
+  loginForm:FormGroup
+  loginModel:LoginModel = new LoginModel();
+  isInvalid:Boolean=false;
+  message:String;
+  alertClass:String;
+  constructor(private oAuthService:OAuthService,
+    private router: Router, private fb:FormBuilder,
+     private oktaAuthWrapper: OktaAuthWrapper,private spinnerService:NgxSpinnerService) {
 
-  constructor(oktaAuth: OktaAuthService, router: Router) {
-
-    this.signIn = new OktaSignIn({
-      /**
-       * Note: when using the Sign-In Widget for an ODIC flow, it still
-       * needs to be configured with the base URL for your Okta Org. Here
-       * we derive it from the given issuer for convenience.
-       */
-      baseUrl: environment.okta.oidc.issuer.split('/oauth2')[0],
-      clientId: environment.okta.oidc.clientId,
-      redirectUri: environment.okta.oidc.redirectUri,
-      logo: '/assets/angular.svg',
-      i18n: {
-        en: {
-          'primaryauth.title': 'Sign in ',
-        },
-      },
-      authParams: {
-        responseType: ['id_token', 'token'],
-        issuer: environment.okta.oidc.issuer,
-        display: 'page',
-        scopes: environment.okta.oidc.scope.split(' '),
-      },
-    });
-
+  
   }
 
   ngOnInit() {
-
-    console.log(this.signIn);
-    this.signIn.renderEl(
-      { el: '#sign-in-widget' },
-      (res) => {
-       
-        console.log(res);
-        if (res.status === 'SUCCESS') {
-          this.signIn.loginRedirect('/', { sessionToken: res.session.token });
-          // Hide the widget
-          this.signIn.hide();
-        }
-        /**
-         * In this flow, the success handler will not be called because we redirect
-         * to the Okta org for the authentication workflow.
-         */
-      },
-      (err) => {
-        throw err;
-      },
-    );
+      this.checkIfLogIn();
+      this.prepareLoginForm();
+    
   }
 
+  prepareLoginForm(){
+    this.loginForm = this.fb.group({
+        userName:[this.loginModel.userName,[Validators.required]],
+        password:[this.loginModel.password,[Validators.required]]
+      
+      
+    })
+
+  }
+
+  loginUser(){
+    if(this.loginForm.invalid){
+      this.isInvalid = true;
+
+      return;
+    }
+    this.spinnerService.show();
+
+    this.isInvalid=false;
+    try{
+      this.oktaAuthWrapper.login(this.loginForm.value).then(() => {
+        this.spinnerService.hide();
+  
+        this.router.navigateByUrl('dashboard')
+      })
+      .catch(err =>{
+        this.spinnerService.hide();
+  
+        console.log('error logging in', err);
+        this.message='Authentication fail';
+        this.alertClass='danger';
+      } );
+    }catch(error){
+      this.spinnerService.hide();
+  
+      console.log('error logging in', error);
+      this.message=error.message;
+      this.alertClass='danger';
+    } 
+    
+  }
+
+  checkIfLogIn(){
+    this.spinnerService.show();
+    
+
+    if(this.oAuthService.hasValidIdToken()){
+      this.router.navigateByUrl('dashboard');
+        this.spinnerService.hide();
+    }else{
+      
+      this.prepareLoginForm();
+      this.spinnerService.hide();
+    }
+  }
+  closePopUp(){
+    this.message ="";
+  }
+
+  
+  hasValidAccessToken(){
+    let idClaims:Object = this.oAuthService.getIdentityClaims();
+    let expAt;
+    if(idClaims.hasOwnProperty("exp")){
+      expAt=idClaims["exp"];
+    }  
+    const date = new Date(0); 
+    date.setUTCSeconds(expAt);
+    let now = new Date();
+    
+    if(expAt && date.valueOf()<now.valueOf()){
+      return false;
+    }
+    return true;
+
+  }
 }

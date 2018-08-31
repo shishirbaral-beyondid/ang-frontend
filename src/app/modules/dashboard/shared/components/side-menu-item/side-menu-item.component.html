@@ -1,0 +1,16 @@
+<li class="nav-item  "   [ngClass]="{'active': item.route ? router.isActive(item.route, true): false, 'expanded': open,'dropdown':item.subLinks.length>0}">
+    <a class="dropdown-toggle" (click)="onItemSelected(item)"  >
+      <span class="icon-holder">
+        <i class="c-orange-500 " [ngClass]="item.icon"></i>
+      </span>
+      <span class="title">{{item.label}}</span>
+      <span class="arrow" *ngIf="item.subLinks.length" >
+        <i class="ti-angle-right"></i>
+      </span>
+    </a>
+    <ul class="dropdown-menu" *ngIf="item.subLinks.length" >
+        <app-side-menu-item *ngFor="let item of item.subLinks" [item]="item"> </app-side-menu-item>
+
+     
+    </ul>
+  </li>

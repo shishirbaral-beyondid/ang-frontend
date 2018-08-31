@@ -1,0 +1,141 @@
+<div class="layer w-100">
+  <div class="peers fxw-nw jc-sb ai-c pY-20 pX-30 bgc-white">
+
+    <div class="peers">
+
+      <a (click)="editUserProfile(user)" tooltip="Edit Profile" class="peer td-n c-grey-900 cH-blue-500 fsz-md" title="">
+        <i class="ti-pencil"></i>
+      </a>
+    </div>
+  </div>
+</div>
+<div class="mT-30">
+  <div class="container" id="needs-validation" novalidate>
+    <!-- Commented to replace with dynamic user update form -->
+    <!--  <form [formGroup]="userForm"  (ngSubmit)="updateUserProfile()" >
+        <div class="row">
+          <div class="col-md-4 mb-3" *ngIf="!isEdit">
+              <h4 class="fsz-def tt-c c-grey-900">First Name</h4>
+              <span class="whs-nw w-100 ov-h tov-e d-b">{{user.profile.firstName}}</span>   
+
+         </div>
+         <div class="form-group col-md-4 mb-3" *ngIf="isEdit">
+             <input type="hidden" formControlName="userId">
+                <label for="exampleInputEmail1">First Name <span calss="astrek">*</span></label>
+                <input type="text" formControlName="firstName"
+                 class="form-control"
+                  [ngClass]="{'is-invalid':userForm.controls['firstName'].errors  && (userForm.controls['firstName'].touched || userForm.controls['firstName'].dirty)}"
+                id="firstName" aria-describedby="emailHelp" >
+                <div class="invalid-feedback" *ngIf="userForm.controls['firstName'].errors && (userForm.controls['firstName'].touched || userForm.controls['firstName'].dirty)">
+                  <div *ngIf="userForm.controls['firstName'].errors.required">First Name is required.</div>
+                </div>
+              </div>
+            <div class="col-md-4 mb-3"  *ngIf="!isEdit">
+                <h4 class="fsz-def tt-c c-grey-900">Middle Name</h4>
+                <span class="whs-nw w-100 ov-h tov-e d-b">{{user.profile.middleName}}</span> 
+  
+            </div>
+            <div class="form-group col-md-4 mb-3" *ngIf="isEdit">
+                    <label for="exampleInputPassword1">Middle Name </label>
+                    <input type="text" formControlName="middleName" class="form-control" id="" >
+            </div>
+          <div class="col-md-4 mb-3"  *ngIf="!isEdit">
+              <h4 class="fsz-def tt-c c-grey-900">Last Name</h4>
+              <span class="whs-nw w-100 ov-h tov-e d-b">{{user.profile.lastName}}</span> 
+
+          </div>
+          <div class="form-group col-md-4 mb-3" *ngIf="isEdit" >
+                <label for="exampleInputPassword1">Last Name </label>
+                <input type="text" formControlName="lastName" class="form-control" id="" >
+              </div>
+        </div>
+        
+        <div class="row">
+          <div class="col-md-4 mb-3"  *ngIf="!isEdit">
+              <h4 class="fsz-def tt-c c-grey-900">User Name</h4>
+              <span class="whs-nw w-100 ov-h tov-e d-b">{{user.profile.login}}</span> 
+
+          </div>
+          <div class="form-group col-md-4 mb-3" *ngIf="isEdit">
+                <label for="login">User Name <span calss="astrek">*</span></label>
+                <input type="email" [ngClass]="{'is-invalid':userForm.controls['login'].errors  && (userForm.controls['login'].touched || userForm.controls['login'].dirty)}"
+                 formControlName="login" class="form-control" id="" >
+                 <div class="invalid-feedback" *ngIf="userForm.controls['login'].errors && (userForm.controls['login'].touched || userForm.controls['login'].dirty)">
+                    <div *ngIf="userForm.controls['login'].errors.required">User Name is required.</div>
+                  </div>
+              </div>
+          <div class="col-md-4 mb-3"  *ngIf="!isEdit">
+                <h4 class="fsz-def tt-c c-grey-900">Email</h4>
+                <span class="whs-nw w-100 ov-h tov-e d-b">{{user.profile.login}}</span> 
+  
+            </div>
+            <div class="form-group col-md-4 mb-3" *ngIf="isEdit">
+                    <label for="exampleInputPassword1">Email <span calss="astrek">*</span></label>
+                    <input type="email" [ngClass]="{'is-invalid':userForm.controls['email'].errors  && (userForm.controls['email'].touched || userForm.controls['email'].dirty)}"
+                     formControlName="email" class="form-control" id="">
+                    <div class="invalid-feedback" *ngIf="userForm.controls['email'].errors && (userForm.controls['email'].touched || userForm.controls['email'].dirty)">
+                        <div *ngIf="userForm.controls['email'].errors.required">Email is required.</div>
+                      </div>
+                  </div>
+            <div class="col-md-4 mb-3"  *ngIf="!isEdit">
+                    <h4 class="fsz-def tt-c c-grey-900">Display Name</h4>
+                    <span class="whs-nw w-100 ov-h tov-e d-b">{{user.profile.displayName}}</span> 
+      
+                </div>
+               
+         
+         
+        </div>
+        
+          <div class="row">
+              <div class="col-md-4 mb-3"  *ngIf="!isEdit">
+                  <h4 class="fsz-def tt-c c-grey-900">Manager</h4>
+                  <span class="whs-nw w-100 ov-h tov-e d-b">{{user.profile.manager}}</span> 
+    
+              </div>
+              <div class="col-md-4 mb-3"  *ngIf="!isEdit">
+                  <h4 class="fsz-def tt-c c-grey-900">Mobile Number</h4>
+                  <span class="whs-nw w-100 ov-h tov-e d-b">{{user.profile.mobilePhone}}</span> 
+              </div>
+              <div class="col-md-4 mb-3"  *ngIf="!isEdit">
+                    <h4 class="fsz-def tt-c c-grey-900">Title</h4>
+                    <span class="whs-nw w-100 ov-h tov-e d-b">{{user.profile.title}}</span> 
+      
+                </div>
+            </div>
+           <div class="row">
+               <button class="btn btn-primary"  *ngIf="isEdit" [disabled]="userForm.invalid"> Save</button>
+               
+               <button class="btn btn-danger pd-10"  *ngIf="isEdit" (cancel)="cancelUpdate();" > Cancel</button>    
+          </div>
+        </form>   -->
+    <!-- <ng-container *ngIf="!isEdit && userDetail">
+            <div  class="row" *ngFor="let user of userDetail">
+                <h4 class="fsz-def tt-c c-grey-900">{{user.displayName}}</h4>
+                <span class="whs-nw w-100 ov-h tov-e d-b">{{user.value}}</span>   
+          
+            </div>
+                  
+        </ng-container>
+           
+        <ng-container *ngIf="isEdit"> -->
+    <ng-container  *ngIf="userForm">
+    <form (ngSubmit)="updateUserProfile()" [formGroup]="userForm">
+         <input type="hidden" class="form-control" formControlName="id">
+       <div  class="form-row " >
+          <div class="col-md-4" *ngFor="let userProfile of userProfileList">
+        <app-user-profile-edit-dynamic-form [userProfile]="userProfile" [userForm]="userForm" [isEdit]="isEdit"></app-user-profile-edit-dynamic-form>
+    </div>  
+    </div>
+
+      <div class="form-row" *ngIf="isEdit">
+        <button class="btn btn-primary" > Save</button>
+        <button class="btn btn-danger pd-10" type="button" (click)="cancelUpdate();"> Cancel</button>
+      </div>
+    </form>
+
+</ng-container>
+    <!--  </ng-container>  -->
+  </div>
+
+</div>

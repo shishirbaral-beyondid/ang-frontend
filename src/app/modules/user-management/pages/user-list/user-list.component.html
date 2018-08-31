@@ -1,0 +1,36 @@
+<div class="row">
+  <div class="col-md-12">
+      <app-alert-message [message]="message" [alertClass]="alertClass"></app-alert-message>
+        
+    <div class="bgc-white bd bdrs-3 p-20 mB-20">
+      <h4 class="c-grey-900 mB-20">User List</h4>
+      <app-table-top-bar></app-table-top-bar>
+       <table class="table table-striped">
+        <thead>
+          <tr>
+            <th >#</th>
+            <th >Name</th>
+            <th >Username</th>
+            <th> Email</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngIf="users">
+              <tr *ngFor="let user of users.currentPage.items;let i=index">
+                  <th >{{i+1}}</th>
+                  <td><a [routerLink]="[user.id]">{{user.profile.firstName + ' ' + user.profile.lastName}}</a> </td>
+                  <td>{{user.profile.login}}</td>
+                  <td>{{user.profile.email}}</td>
+                  <td>{{user.status}}</td>
+                  <td><button type="button" (click)="editUser(user.id)" class="btn cur-p btn-primary">Edit</button><button type="button" class="btn cur-p btn-danger" (click)="deleteUser(user.id)">Delete</button></td>
+                </tr>
+          </ng-container>
+         
+          
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

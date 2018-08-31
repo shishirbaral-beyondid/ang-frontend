@@ -1,0 +1,8 @@
+<ng-container *ngIf="message">
+    <div class="alert alert-{{alertClass}} alert-dismissible fade show" role="alert">
+        {{message}}
+         <button type="button" class="close" (click)="closePopUp()"  aria-label="Close">
+           <span aria-hidden="true">&times;</span>
+         </button>
+       </div>
+</ng-container>

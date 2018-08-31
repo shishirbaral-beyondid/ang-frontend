@@ -1,0 +1,74 @@
+<div class="layer w-100">
+    <div class="peers fxw-nw jc-sb ai-c pY-20 pX-30 bgc-white">
+      
+      <div class="peers">
+       
+         <button  (click)="openModal(template)" class="peer td-n c-grey-900 cH-blue-500 fsz-md btn btn-primary" >
+           <i  tooltip ="Add Group"class="ti-plus"></i>
+          </button>          
+          
+        </div>
+      </div>
+  </div>
+  <div class="mT-30 mB-30 overflow-auto">
+      <div class="container" >
+            
+               <ng-container *ngIf="groupsData" >
+                  <div *ngFor="let group of groupsData" class="peers fxw-nw ai-c p-20 bdB bgc-white bgcH-grey-50 ">
+                      <div class="peer">
+                        <img [src]="group.links.logo[0].href" alt="" class="w-3r h-3r bdrs-50p">
+                      </div>
+                      <div class="peer peer-greed pL-20">
+                        <a (click)="goToGroup(group)" class="cur-p" > <h6 class="mB-0 lh-1 fw-400">{{group.profile.name}}</h6></a>
+                        <small class="lh-1 c-green-500">{{group.profile.description}}</small>
+                      </div>
+                      <div class="peers mR-15">
+                        <div class="peer">
+                          <a (click)="openConfirmModal(group.id)" class="td-n c-deep-red-500 cH-red-500 fsz-md p-5">
+                            <i tooltip="Remove Group" class="ti-trash icon-red"></i>
+                          </a>
+                        </div>
+                        
+                      </div>
+                    </div>
+               </ng-container>
+                  
+                    
+                 
+
+      </div>
+    </div>
+      
+    <ng-template #template>
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">Add Group to user</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+              <form [formGroup]="groupForm" novalidate>
+                <div class="form-group">
+                  <angular2-multiselect [data]="itemList" 
+                          [(ngModel)]="selectedItems" 
+                          [settings]="dropdownSettings" 
+                        
+                        
+                          formControlName="selectedGroups">
+                          <c-search>
+                              <ng-template>
+                                  <input type="text" (keyup)="onSearch($event)" placeholder="Search group" style="border: none;width: 100%; height: 100%;outline: none;"/>
+                              </ng-template>
+                         </c-search>
+                         <c-item>
+                             <ng-template let-item="item">
+                                 <label style="color: #333;width: 150px;">{{item.name}}</label>
+                             </ng-template>
+                         </c-item>
+                  </angular2-multiselect>
+                  </div>
+                  <button (click)="submitGroupAddForm()" [disabled]="!groupForm.valid" class="btn btn-success btn-block">Submit</button>
+              </form>
+
+      </div>
+    </ng-template>

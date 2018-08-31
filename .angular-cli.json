@@ -25,14 +25,15 @@
         "../node_modules/semantic-ui-css/semantic.min.css",
         "../node_modules/@okta/okta-signin-widget/dist/css/okta-sign-in.min.css",
         "../node_modules/@okta/okta-signin-widget/dist/css/okta-theme.css",
-        "../node_modules/font-awesome/css/font-awesome.min.css"
+        "../node_modules/font-awesome/css/font-awesome.min.css",
+        "../node_modules/ngx-toastr/toastr.css"
        
       ],
       "scripts": [
        "../node_modules/jquery/dist/jquery.min.js",
         "../node_modules/popper.js/dist/umd/popper.min.js",
-        "../node_modules/bootstrap/dist/js/bootstrap.min.js"
-       
+        "../node_modules/bootstrap/dist/js/bootstrap.min.js",
+       "./assets/scripts/sidebar/index.js"
       
        ],
       "environmentSource": "environments/environment.ts",
